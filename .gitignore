@@ -32,7 +32,6 @@ db.sqlite3
 
 *.mo
 *.swp
-migrations/
 **/migrations/**/__pycache__/
 **/migrations/*.pyc
 

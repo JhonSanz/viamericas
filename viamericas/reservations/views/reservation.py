@@ -1,6 +1,9 @@
 from rest_framework import viewsets
 from reservations.models import Reservation
-from reservations.views import ReservationSerializer, ReservationCreateSerializer
+from reservations.serializers.reservation import (
+    ReservationSerializer,
+    ReservationCreateSerializer,
+)
 
 
 class ReservationViewSet(viewsets.ModelViewSet):

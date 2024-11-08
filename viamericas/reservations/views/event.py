@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 from reservations.models import Event
-from reservations.views import EventSerializer, EventCreateSerializer
+from reservations.serializers.event import EventSerializer, EventCreateSerializer
 
 
 class EventViewSet(viewsets.ModelViewSet):
