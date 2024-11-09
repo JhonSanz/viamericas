@@ -4,6 +4,7 @@ from reservations.serializers.reservation import (
     ReservationSerializer,
     ReservationCreateSerializer,
 )
+from reservations.utils.paginator import CustomPagination
 
 
 class ReservationViewSet(viewsets.ModelViewSet):
@@ -11,6 +12,7 @@ class ReservationViewSet(viewsets.ModelViewSet):
     serializer_class = ReservationSerializer
     authentication_classes = []
     permission_classes = []
+    pagination_class = CustomPagination
 
     def get_serializer_class(self):
         if self.action == "create":

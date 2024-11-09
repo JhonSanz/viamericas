@@ -1,6 +1,7 @@
 from rest_framework import viewsets
 from reservations.models import Event
 from reservations.serializers.event import EventSerializer, EventCreateSerializer
+from reservations.utils.paginator import CustomPagination
 
 
 class EventViewSet(viewsets.ModelViewSet):
@@ -8,6 +9,7 @@ class EventViewSet(viewsets.ModelViewSet):
     serializer_class = EventSerializer
     authentication_classes = []
     permission_classes = []
+    pagination_class = CustomPagination
 
     def get_serializer_class(self):
         if self.action == "create":
