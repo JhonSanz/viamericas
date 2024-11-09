@@ -6,6 +6,8 @@ from reservations.serializers.event import EventSerializer, EventCreateSerialize
 class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
+    authentication_classes = []
+    permission_classes = []
 
     def get_serializer_class(self):
         if self.action == "create":
@@ -16,13 +18,13 @@ class EventViewSet(viewsets.ModelViewSet):
         queryset = super().get_queryset()
 
         if self.action == "list":
-            title = self.request.query_params.get("title")
+            name = self.request.query_params.get("name")
             category_id = self.request.query_params.get("category_id")
             date_from = self.request.query_params.get("date_from")
             date_to = self.request.query_params.get("date_to")
 
-            if title:
-                queryset = queryset.filter(title__icontains=title)
+            if name:
+                queryset = queryset.filter(name__icontains=name)
 
             if category_id:
                 queryset = queryset.filter(category_id=category_id)
