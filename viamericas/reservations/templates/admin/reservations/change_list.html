@@ -1,0 +1,13 @@
+{% extends "admin/change_list.html" %}
+
+{% block content %}
+
+<div class="datepicker-filter" style="margin: 20px 0;">
+    <form method="get">
+        <label for="datepicker">Select a date:</label>
+        <input type="date" id="datepicker" name="date" value="{{ request.GET.date }}" onchange="this.form.submit()">
+    </form>
+</div>
+{{ block.super }}
+
+{% endblock %}
