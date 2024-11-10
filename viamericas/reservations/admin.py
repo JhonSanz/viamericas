@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.utils import timezone
+import datetime
 from .models import Category, Speaker, Event, Attendee, Reservation
 from .models import Event
 from django.contrib.auth.models import User, Group
@@ -6,10 +8,46 @@ from django.contrib import admin
 from django.utils import timezone
 from .models import Event
 import datetime
+from django.db.models import Count
+from io import BytesIO
+from django.utils.safestring import mark_safe
+import base64
+import matplotlib
+
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
 
 
 class CustomAdminSite(admin.AdminSite):
     site_header = "Viamericas Admin"
+
+    def __generate_chart(self, *, request, extra_context=None):
+        if extra_context is None:
+            extra_context = {}
+
+        events_by_category = Event.objects.values("category__name").annotate(
+            total=Count("id")
+        )
+
+        labels = [entry["category__name"] for entry in events_by_category]
+        sizes = [entry["total"] for entry in events_by_category]
+
+        fig, ax = plt.subplots()
+        ax.pie(sizes, labels=labels, autopct="%1.1f%%", startangle=90)
+        ax.axis("equal")
+
+        buffer = BytesIO()
+        plt.savefig(buffer, format="png")
+        buffer.seek(0)
+        image_png = buffer.getvalue()
+        buffer.close()
+        graphic = base64.b64encode(image_png).decode("utf-8")
+
+        extra_context["events_pie_chart"] = mark_safe(
+            f'<img src="data:image/png;base64,{graphic}" />'
+        )
+
+        return super().index(request, extra_context=extra_context)
 
     def index(self, request, extra_context=None):
         today = timezone.now().date()
@@ -19,6 +57,8 @@ class CustomAdminSite(admin.AdminSite):
         if extra_context is None:
             extra_context = {}
         extra_context["upcoming_events"] = upcoming_events
+
+        self.__generate_chart(request=request, extra_context=extra_context)
 
         return super().index(request, extra_context=extra_context)
 
@@ -45,9 +85,6 @@ class EventDateFilter(admin.SimpleListFilter):
         )
 
     def queryset(self, request, queryset):
-        from django.utils import timezone
-        import datetime
-
         today = timezone.now().date()
 
         if self.value() == "today":
@@ -63,7 +100,7 @@ class EventDateFilter(admin.SimpleListFilter):
 
 
 class EventAdmin(admin.ModelAdmin):
-    list_display = ("name", "date", "location", "category")
+    list_display = ("name", "date", "location", "category", "total_reservations")
     search_fields = ["name", "location", "category__name"]
     list_filter = (EventDateFilter,)
 
@@ -73,6 +110,11 @@ class EventAdmin(admin.ModelAdmin):
         if date:
             qs = qs.filter(date__date=date)
         return qs
+
+    def total_reservations(self, obj):
+        return obj.reservations.count()
+
+    total_reservations.short_description = "Total Reservations"
 
 
 admin_site.register(User)

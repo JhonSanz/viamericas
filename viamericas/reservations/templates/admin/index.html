@@ -14,6 +14,14 @@
 {% block content %}
 <div id="content-main">
     {% include "admin/app_list.html" with app_list=app_list show_changelinks=True %}
+    <h2>Events by Category</h2>
+    <div>
+        {% if events_pie_chart %}
+            {{ events_pie_chart|safe }}
+        {% else %}
+            <p>No events found to display chart.</p>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}
 
@@ -24,7 +32,7 @@
 {% block sidebar %}
 <div id="content-related">
     <div class="module" id="recent-actions-module">
-        <h2>Upcoming Events (Next 7 Days)</h2>
+        <h2><b>Upcoming Events</b><br><small>(Next 7 Days)</small></h2>
         <ul>
             {% for event in upcoming_events %}
             <li>
