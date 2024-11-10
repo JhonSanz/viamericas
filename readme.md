@@ -1,10 +1,39 @@
+# Data por defecto
+
+Para poblar la información en la base de datos creé un archivo `seed.py` el cual se corre en la fase de construcción del docker compose por medio del comando personalizado `python manage.py populate`. Aqui se crearán dos usuarios con diferentes niveles de permisos
+
+| username        | password          |
+| --------------- | ----------------- |
+| viamericas      | holamundo123      |
+| restricted_user | restrictedpass123 |
+
+esto es útil para evidenciar el manejo de permisos en el panel administrativo de django.
+
+Adicionalmente se crearon datos para el resto de modelos, ya que la API solo fue creada para gestionar Event y Reservation.
+
+# Personalizaciones para en panel administrativo
+
+Adjuntaré algunos pantallazos para hacer mas facil la explicación
+
+![image_0](image_0.png)
+![image_1](image_1.png)
+
+1. Modificación de estilos para la barra superior
+2. Recuadro con eventos que se llevarán a cabo la proxima semana
+3. PieChart con la información de número de eventos por categoría
+4. Filtro avanzado por periodos de tiempo
+5. Filtro avanzado incrustado en la plantilla de filtro por fecha específica en el calendario
+6. Campo calculado adicional de total de reservas de cada evento
+
 # Link para documentación con postman
 
 - https://www.postman.com/dark-space-466960/viamericas/collection/f0faznp/viamericas
 
 # Export de archivo xlsx
 
+Para probar esta característica recomiendo utilizar el navegador web, no encontré como hacer que postamn procesara la respuesta para descargar el archivo. El queryparam puede ser event o category
 
+- http://localhost:8000/report?model=event
 
 # Correr localmente
 
