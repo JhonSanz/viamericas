@@ -39,6 +39,7 @@ Adjuntaré algunos pantallazos para hacer mas facil la explicación
 4. Filtro avanzado por periodos de tiempo
 5. Filtro avanzado incrustado en la plantilla de filtro por fecha específica en el calendario
 6. Campo calculado adicional de total de reservas de cada evento
+7. Se agregaron dos acciones nuevas en Event: Convertir nombres a mayúsculas y Capitalizar nombres
 
 # Export de archivo xlsx
 

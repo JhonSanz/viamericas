@@ -8,7 +8,8 @@ from django.contrib import admin
 from django.utils import timezone
 from .models import Event
 import datetime
-from django.db.models import Count
+from django.db.models import Count, F
+from django.db.models.functions import Upper
 from io import BytesIO
 from django.utils.safestring import mark_safe
 import base64
@@ -115,6 +116,18 @@ class EventAdmin(admin.ModelAdmin):
         return obj.reservations.count()
 
     total_reservations.short_description = "Total Reservations"
+
+    @admin.action(description="Convertir nombres a mayúsculas")
+    def make_uppercase(self, request, queryset):
+        queryset.update(name=Upper(F("name")))
+
+    @admin.action(description="Capitalizar nombres")
+    def make_capitalize(self, request, queryset):
+        for event in queryset:
+            event.name = event.name.title()
+            event.save()
+
+    actions = ["make_uppercase", "make_capitalize"]
 
 
 admin_site.register(User)
