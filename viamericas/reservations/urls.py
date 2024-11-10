@@ -5,7 +5,6 @@ from reservations.views.event import EventViewSet
 from reservations.views.reservation import ReservationViewSet
 from reservations.views.report import ReportViewSet
 
-
 router = DefaultRouter()
 router.register(r"events", EventViewSet)
 router.register(r"reservations", ReservationViewSet)

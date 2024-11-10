@@ -49,10 +49,10 @@ Para probar esta característica recomiendo utilizar el navegador web, no encont
 
 # Correr localmente
 
-1. `docker build -t my-django-app .`
-2. `docker run -it --rm -p 8000:8000 my-django-app`
+1. `docker build -t jhonsanz/viamericas .`
+2. `docker run -it --rm -p 8000:8000 jhonsanz/viamericas`
 3. disfrutar
-
+docker push jhonsanz/viamericas
 # Despliegue en AWS
 
 0. Tener instalado `aws cli`
