@@ -11,6 +11,21 @@ esto es útil para evidenciar el manejo de permisos en el panel administrativo d
 
 Adicionalmente se crearon datos para el resto de modelos, ya que la API solo fue creada para gestionar Event y Reservation.
 
+# Uso de la api
+
+Los endpoints de la api están descritos en la siguiente sección de postman. Sin embargo cabe resaltar el orden lógico de los nieveles de permisos de cada uno de los usuarios descritos en el apartado anterior
+
+| username        | access level                                     |
+| --------------- | ------------------------------------------------ |
+| viamericas      | fullaccess                                       |
+| restricted_user | view_reservation, change_reservation, view_event |
+
+Por lo cual una prueba interesante es intentar eliminar algún registro con el usuario `restricted_user` obteniendo un 403. Para ello nos logueamos en el endpoint `api-token-auth/` y con el test configurado en postman automaticamente almacenará el token en la variable {{token}} y esta será usada en los endpoints subyacentes.
+
+# Link para documentación con postman
+
+- https://www.postman.com/dark-space-466960/viamericas/collection/f0faznp/viamericas
+  
 # Personalizaciones para en panel administrativo
 
 Adjuntaré algunos pantallazos para hacer mas facil la explicación
@@ -24,10 +39,6 @@ Adjuntaré algunos pantallazos para hacer mas facil la explicación
 4. Filtro avanzado por periodos de tiempo
 5. Filtro avanzado incrustado en la plantilla de filtro por fecha específica en el calendario
 6. Campo calculado adicional de total de reservas de cada evento
-
-# Link para documentación con postman
-
-- https://www.postman.com/dark-space-466960/viamericas/collection/f0faznp/viamericas
 
 # Export de archivo xlsx
 

@@ -8,8 +8,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 RUN chmod +x init.sh
 
-ENV DEBUG=True
-ENV DJANGO_ENV=development
+ENV DEBUG=False
+ENV DJANGO_ENV=production
 ENV PYTHONUNBUFFERED=1
 
 EXPOSE 8000

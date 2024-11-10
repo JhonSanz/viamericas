@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import Permission
+from rest_framework.authtoken.models import Token
 
 
 class DataCreator:
@@ -47,6 +48,7 @@ class DataCreator:
             model_content_type = ContentType.objects.get_for_model(model_name)
             permissions = Permission.objects.filter(content_type=model_content_type)
             superuser.user_permissions.add(*permissions)
+        Token.objects.get_or_create(user=superuser)
 
         restricted_user = User.objects.create(
             username="restricted_user",
@@ -74,6 +76,10 @@ class DataCreator:
             ),
         ]
         restricted_user.user_permissions.add(*restricted_permissions)
+
+        # Generar tokens para los usuarios
+        Token.objects.get_or_create(user=restricted_user)
+
         self.users = [superuser, restricted_user]
 
     def create_categories(self):

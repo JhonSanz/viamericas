@@ -1,3 +1,5 @@
+from rest_framework.permissions import IsAuthenticated, DjangoModelPermissions
+from rest_framework.authentication import TokenAuthentication
 from rest_framework import viewsets
 from reservations.models import Event
 from reservations.serializers.event import EventSerializer, EventCreateSerializer
@@ -7,8 +9,8 @@ from reservations.utils.paginator import CustomPagination
 class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
-    authentication_classes = []
-    permission_classes = []
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated, DjangoModelPermissions]
     pagination_class = CustomPagination
 
     def get_serializer_class(self):
