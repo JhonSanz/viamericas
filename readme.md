@@ -24,7 +24,7 @@ Por lo cual una prueba interesante es intentar eliminar algún registro con el u
 
 # Link para documentación con postman
 
-- https://www.postman.com/dark-space-466960/viamericas/collection/f0faznp/viamericas
+- https://www.postman.com/dark-space-466960/viamericas/documentation/f0faznp/viamericas
   
 # Personalizaciones para en panel administrativo
 
@@ -40,6 +40,15 @@ Adjuntaré algunos pantallazos para hacer mas facil la explicación
 5. Filtro avanzado incrustado en la plantilla de filtro por fecha específica en el calendario
 6. Campo calculado adicional de total de reservas de cada evento
 7. Se agregaron dos acciones nuevas en Event: Convertir nombres a mayúsculas y Capitalizar nombres
+
+# Test
+
+Creé solamente el test para el viewSet del modelo Event. Para ejecutarlo:
+
+1. Activar el virtualenv con todo instalado
+2. Pararse en el directorio viamericas (allí está el pytest.ini)
+3. Ejecutar `pytest`
+4. Disfrutar
 
 # Export de archivo xlsx
 
