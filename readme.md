@@ -61,19 +61,19 @@ Para probar esta característica recomiendo utilizar el navegador web, no encont
 1. `docker build -t jhonsanz/viamericas .`
 2. `docker run -it --rm -p 8000:8000 jhonsanz/viamericas`
 3. disfrutar
-docker push jhonsanz/viamericas
+
 # Despliegue en AWS
 
-0. Tener instalado `aws cli`
-1. Tener configurado `aws config`
-2. Entrar al directorio `/iac`
-3. Activar el entorno virtual `.venv\Scripts\activate` o `.venv/bin/activate`
-4. Ejecutar `pip install -r requirements.txt`
-5. Ejectuar `cdk bootstrap`
-6. Opcional `cdk synth` para ver la plantilla de cloud formation
-7. Ejectuar `cdk deploy` para desplegar el contenido
-8. Disfrutar
-9. Recomendado `cdk destroy` para eliminar el stack
+1. Tener instalado `aws cli`
+2. Tener configurado `aws config`
+3. Entrar al directorio `/iac`
+4. Activar el entorno virtual `.venv\Scripts\activate` o `.venv/bin/activate`
+5. Ejecutar `pip install -r requirements.txt`
+6. Ejectuar `cdk bootstrap`
+7. Opcional `cdk synth` para ver la plantilla de cloud formation
+8. Ejectuar `cdk deploy` para desplegar el contenido
+9. Disfrutar
+10. Recomendado `cdk destroy` para eliminar el stack
 
 Como puede verse en el archivo `iac/iac_stack.py` la imagen de docker fue previamente subida a un repositorio y no se hizo ese step en el archivo de AWS CDK.
 
