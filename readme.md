@@ -1,6 +1,6 @@
 # Data por defecto
 
-Para poblar la información en la base de datos creé un archivo `seed.py` el cual se corre en la fase de construcción del docker compose por medio del comando personalizado `python manage.py populate`. Aqui se crearán dos usuarios con diferentes niveles de permisos
+Para poblar la información en la base de datos creé un archivo `seed.py` el cual se corre en la fase de construcción del dockerfile por medio del comando personalizado `python manage.py populate`. Aqui se crearán dos usuarios con diferentes niveles de permisos
 
 | username        | password          |
 | --------------- | ----------------- |
